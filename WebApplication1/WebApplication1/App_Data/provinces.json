@@ -1,0 +1,569 @@
+[
+  {
+    "Name": "An Giang",
+    "Slug": "an-giang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh An Giang",
+    "Code": "89",
+    "Key": "an_giang",
+    "ReesoftProvinceId": 309
+  },
+  {
+    "Name": "Bà Rịa - Vũng Tàu",
+    "Slug": "ba-ria-vung-tau",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bà Rịa - Vũng Tàu",
+    "Code": "77",
+    "Key": "ba_ria_vung_tau",
+    "ReesoftProvinceId": 308
+  },
+  {
+    "Name": "Bạc Liêu",
+    "Slug": "bac-lieu",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bạc Liêu",
+    "Code": "95",
+    "Key": "bac_lieu",
+    "ReesoftProvinceId": 305
+  },
+  {
+    "Name": "Bắc Giang",
+    "Slug": "bac-giang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bắc Giang",
+    "Code": "24",
+    "Key": "bac_giang",
+    "ReesoftProvinceId": 307
+  },
+  {
+    "Name": "Bắc Kạn",
+    "Slug": "bac-kan",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bắc Kạn",
+    "Code": "06",
+    "Key": "bac_kan",
+    "ReesoftProvinceId": 306
+  },
+  {
+    "Name": "Bắc Ninh",
+    "Slug": "bac-ninh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bắc Ninh",
+    "Code": "27",
+    "Key": "bac_ninh",
+    "ReesoftProvinceId": 304
+  },
+  {
+    "Name": "Bến Tre",
+    "Slug": "ben-tre",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bến Tre",
+    "Code": "83",
+    "Key": "ben_tre",
+    "ReesoftProvinceId": 303
+  },
+  {
+    "Name": "Bình Dương",
+    "Slug": "binh-duong",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bình Dương",
+    "Code": "74",
+    "Key": "binh_duong",
+    "ReesoftProvinceId": 301
+  },
+  {
+    "Name": "Bình Định",
+    "Slug": "binh-dinh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bình Định",
+    "Code": "52",
+    "Key": "binh_dinh",
+    "ReesoftProvinceId": 302
+  },
+  {
+    "Name": "Bình Phước",
+    "Slug": "binh-phuoc",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bình Phước",
+    "Code": "70",
+    "Key": "binh_phuoc",
+    "ReesoftProvinceId": 300
+  },
+  {
+    "Name": "Bình Thuận",
+    "Slug": "binh-thuan",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Bình Thuận",
+    "Code": "60",
+    "Key": "binh_thuan",
+    "ReesoftProvinceId": 299
+  },
+  {
+    "Name": "Cà Mau",
+    "Slug": "ca-mau",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Cà Mau",
+    "Code": "96",
+    "Key": "ca_mau",
+    "ReesoftProvinceId": 298
+  },
+  {
+    "Name": "Cao Bằng",
+    "Slug": "cao-bang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Cao Bằng",
+    "Code": "04",
+    "Key": "cao_bang",
+    "ReesoftProvinceId": 297
+  },
+  {
+    "Name": "Cần Thơ",
+    "Slug": "can-tho",
+    "Type": "thanh-pho",
+    "name_with_type": "Thành phố Cần Thơ",
+    "Code": "92",
+    "Key": "thanh_pho_can_tho",
+    "ReesoftProvinceId": 311
+  },
+  {
+    "Name": "Đà Nẵng",
+    "Slug": "da-nang",
+    "Type": "thanh-pho",
+    "name_with_type": "Thành phố Đà Nẵng",
+    "Code": "48",
+    "Key": "thanh_pho_da_nang",
+    "ReesoftProvinceId": 251
+  },
+  {
+    "Name": "Đắk Lắk",
+    "Slug": "dak-lak",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Đắk Lắk",
+    "Code": "66",
+    "Key": "dak_lak",
+    "ReesoftProvinceId": 296
+  },
+  {
+    "Name": "Đắk Nông",
+    "Slug": "dak-nong",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Đắk Nông",
+    "Code": "67",
+    "Key": "dak_nong",
+    "ReesoftProvinceId": 295
+  },
+  {
+    "Name": "Điện Biên",
+    "Slug": "dien-bien",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Điện Biên",
+    "Code": "11",
+    "Key": "dien_bien",
+    "ReesoftProvinceId": 294
+  },
+  {
+    "Name": "Đồng Nai",
+    "Slug": "dong-nai",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Đồng Nai",
+    "Code": "75",
+    "Key": "dong_nai",
+    "ReesoftProvinceId": 293
+  },
+  {
+    "Name": "Đồng Tháp",
+    "Slug": "dong-thap",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Đồng Tháp",
+    "Code": "87",
+    "Key": "dong_thap",
+    "ReesoftProvinceId": 292
+  },
+  {
+    "Name": "Gia Lai",
+    "Slug": "gia-lai",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Gia Lai",
+    "Code": "64",
+    "Key": "gia_lai",
+    "ReesoftProvinceId": 291
+  },
+  {
+    "Name": "Hà Giang",
+    "Slug": "ha-giang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Hà Giang",
+    "Code": "02",
+    "Key": "ha_giang",
+    "ReesoftProvinceId": 290
+  },
+  {
+    "Name": "Hà Nam",
+    "Slug": "ha-nam",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Hà Nam",
+    "Code": "35",
+    "Key": "ha_nam",
+    "ReesoftProvinceId": 289
+  },
+  {
+    "Name": "Hà Nội",
+    "Slug": "ha-noi",
+    "Type": "thanh-pho",
+    "name_with_type": "Thành phố Hà Nội",
+    "Code": "01",
+    "Key": "thanh_pho_ha_noi",
+    "ReesoftProvinceId": 250
+  },
+  {
+    "Name": "Hà Tĩnh",
+    "Slug": "ha-tinh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Hà Tĩnh",
+    "Code": "42",
+    "Key": "ha_tinh",
+    "ReesoftProvinceId": 288
+  },
+  {
+    "Name": "Hải Dương",
+    "Slug": "hai-duong",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Hải Dương",
+    "Code": "30",
+    "Key": "hai_duong",
+    "ReesoftProvinceId": 287
+  },
+  {
+    "Name": "Hải Phòng",
+    "Slug": "hai-phong",
+    "Type": "thanh-pho",
+    "name_with_type": "Thành phố Hải Phòng",
+    "Code": "31",
+    "Key": "thanh_pho_hai_phong",
+    "ReesoftProvinceId": 310
+  },
+  {
+    "Name": "Hậu Giang",
+    "Slug": "hau-giang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Hậu Giang",
+    "Code": "93",
+    "Key": "hau_giang",
+    "ReesoftProvinceId": 286
+  },
+  {
+    "Name": "Hoà Bình",
+    "Slug": "hoa-binh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Hoà Bình",
+    "Code": "17",
+    "Key": "hoa_binh",
+    "ReesoftProvinceId": 285
+  },
+  {
+    "Name": "Hồ Chí Minh",
+    "Slug": "ho-chi-minh",
+    "Type": "thanh-pho",
+    "name_with_type": "Thành phố Hồ Chí Minh",
+    "Code": "79",
+    "Key": "thanh_pho_ho_chi_minh",
+    "ReesoftProvinceId": 249
+  },
+  {
+    "Name": "Hưng Yên",
+    "Slug": "hung-yen",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Hưng Yên",
+    "Code": "33",
+    "Key": "hung_yen",
+    "ReesoftProvinceId": 284
+  },
+  {
+    "Name": "Khánh Hòa",
+    "Slug": "khanh-hoa",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Khánh Hòa",
+    "Code": "56",
+    "Key": "khanh_hoa",
+    "ReesoftProvinceId": 283
+  },
+  {
+    "Name": "Kiên Giang",
+    "Slug": "kien-giang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Kiên Giang",
+    "Code": "91",
+    "Key": "kien_giang",
+    "ReesoftProvinceId": 282
+  },
+  {
+    "Name": "Kon Tum",
+    "Slug": "kon-tum",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Kon Tum",
+    "Code": "62",
+    "Key": "kon_tum",
+    "ReesoftProvinceId": 281
+  },
+  {
+    "Name": "Lai Châu",
+    "Slug": "lai-chau",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Lai Châu",
+    "Code": "12",
+    "Key": "lai_chau",
+    "ReesoftProvinceId": 280
+  },
+  {
+    "Name": "Lạng Sơn",
+    "Slug": "lang-son",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Lạng Sơn",
+    "Code": "20",
+    "Key": "lang_son",
+    "ReesoftProvinceId": 278
+  },
+  {
+    "Name": "Lào Cai",
+    "Slug": "lao-cai",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Lào Cai",
+    "Code": "10",
+    "Key": "lao_cai",
+    "ReesoftProvinceId": 277
+  },
+  {
+    "Name": "Lâm Đồng",
+    "Slug": "lam-dong",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Lâm Đồng",
+    "Code": "68",
+    "Key": "lam_dong",
+    "ReesoftProvinceId": 279
+  },
+  {
+    "Name": "Long An",
+    "Slug": "long-an",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Long An",
+    "Code": "80",
+    "Key": "long_an",
+    "ReesoftProvinceId": 276
+  },
+  {
+    "Name": "Nam Định",
+    "Slug": "nam-dinh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Nam Định",
+    "Code": "36",
+    "Key": "nam_dinh",
+    "ReesoftProvinceId": 275
+  },
+  {
+    "Name": "Nghệ An",
+    "Slug": "nghe-an",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Nghệ An",
+    "Code": "40",
+    "Key": "nghe_an",
+    "ReesoftProvinceId": 274
+  },
+  {
+    "Name": "Ninh Bình",
+    "Slug": "ninh-binh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Ninh Bình",
+    "Code": "37",
+    "Key": "ninh_binh",
+    "ReesoftProvinceId": 273
+  },
+  {
+    "Name": "Ninh Thuận",
+    "Slug": "ninh-thuan",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Ninh Thuận",
+    "Code": "58",
+    "Key": "ninh_thuan",
+    "ReesoftProvinceId": 272
+  },
+  {
+    "Name": "Phú Thọ",
+    "Slug": "phu-tho",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Phú Thọ",
+    "Code": "25",
+    "Key": "phu_tho",
+    "ReesoftProvinceId": 271
+  },
+  {
+    "Name": "Phú Yên",
+    "Slug": "phu-yen",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Phú Yên",
+    "Code": "54",
+    "Key": "phu_yen",
+    "ReesoftProvinceId": 270
+  },
+  {
+    "Name": "Quảng Bình",
+    "Slug": "quang-binh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Quảng Bình",
+    "Code": "44",
+    "Key": "quang_binh",
+    "ReesoftProvinceId": 269
+  },
+  {
+    "Name": "Quảng Nam",
+    "Slug": "quang-nam",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Quảng Nam",
+    "Code": "49",
+    "Key": "quang_nam",
+    "ReesoftProvinceId": 268
+  },
+  {
+    "Name": "Quảng Ngãi",
+    "Slug": "quang-ngai",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Quảng Ngãi",
+    "Code": "51",
+    "Key": "quang_ngai",
+    "ReesoftProvinceId": 267
+  },
+  {
+    "Name": "Quảng Ninh",
+    "Slug": "quang-ninh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Quảng Ninh",
+    "Code": "22",
+    "Key": "quang_ninh",
+    "ReesoftProvinceId": 266
+  },
+  {
+    "Name": "Quảng Trị",
+    "Slug": "quang-tri",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Quảng Trị",
+    "Code": "45",
+    "Key": "quang_tri",
+    "ReesoftProvinceId": 265
+  },
+  {
+    "Name": "Sóc Trăng",
+    "Slug": "soc-trang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Sóc Trăng",
+    "Code": "94",
+    "Key": "soc_trang",
+    "ReesoftProvinceId": 264
+  },
+  {
+    "Name": "Sơn La",
+    "Slug": "son-la",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Sơn La",
+    "Code": "14",
+    "Key": "son_la",
+    "ReesoftProvinceId": 263
+  },
+  {
+    "Name": "Tây Ninh",
+    "Slug": "tay-ninh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Tây Ninh",
+    "Code": "72",
+    "Key": "tay_ninh",
+    "ReesoftProvinceId": 262
+  },
+  {
+    "Name": "Thái Bình",
+    "Slug": "thai-binh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Thái Bình",
+    "Code": "34",
+    "Key": "thai_binh",
+    "ReesoftProvinceId": 261
+  },
+  {
+    "Name": "Thái Nguyên",
+    "Slug": "thai-nguyen",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Thái Nguyên",
+    "Code": "19",
+    "Key": "thai_nguyen",
+    "ReesoftProvinceId": 260
+  },
+  {
+    "Name": "Thanh Hóa",
+    "Slug": "thanh-hoa",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Thanh Hóa",
+    "Code": "38",
+    "Key": "thanh_hoa",
+    "ReesoftProvinceId": 259
+  },
+  {
+    "Name": "Thừa Thiên Huế",
+    "Slug": "thua-thien-hue",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Thừa Thiên Huế",
+    "Code": "46",
+    "Key": "thua_thien_hue",
+    "ReesoftProvinceId": 258
+  },
+  {
+    "Name": "Tiền Giang",
+    "Slug": "tien-giang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Tiền Giang",
+    "Code": "82",
+    "Key": "tien_giang",
+    "ReesoftProvinceId": 257
+  },
+  {
+    "Name": "Trà Vinh",
+    "Slug": "tra-vinh",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Trà Vinh",
+    "Code": "84",
+    "Key": "tra_vinh",
+    "ReesoftProvinceId": 256
+  },
+  {
+    "Name": "Tuyên Quang",
+    "Slug": "tuyen-quang",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Tuyên Quang",
+    "Code": "08",
+    "Key": "tuyen_quang",
+    "ReesoftProvinceId": 255
+  },
+  {
+    "Name": "Vĩnh Long",
+    "Slug": "vinh-long",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Vĩnh Long",
+    "Code": "86",
+    "Key": "vinh_long",
+    "ReesoftProvinceId": 254
+  },
+  {
+    "Name": "Vĩnh Phúc",
+    "Slug": "vinh-phuc",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Vĩnh Phúc",
+    "Code": "26",
+    "Key": "vinh_phuc",
+    "ReesoftProvinceId": 253
+  },
+  {
+    "Name": "Yên Bái",
+    "Slug": "yen-bai",
+    "Type": "tinh",
+    "name_with_type": "Tỉnh Yên Bái",
+    "Code": "15",
+    "Key": "yen_bai",
+    "ReesoftProvinceId": 252
+  }
+]
