@@ -23,7 +23,7 @@ public class RemapsWardModel
 
     public string Key { get; set; } = string.Empty;
 
-    public int? ReesoftWardId { get; set; }
+    public int[] ReesoftWardIds { get; set; } = [];
     public int? ReesoftDistrictId { get; set; }
     public int? ReesoftProvinceId { get; set; }
 }

@@ -9,10 +9,10 @@
     "ReesoftProvinceId": 309
   },
   {
-    "Name": "Bà Rịa - Vũng Tàu",
+    "Name": "Bà Rịa Vũng Tàu",
     "Slug": "ba-ria-vung-tau",
     "Type": "tinh",
-    "name_with_type": "Tỉnh Bà Rịa - Vũng Tàu",
+    "name_with_type": "Tỉnh Bà Rịa Vũng Tàu",
     "Code": "77",
     "Key": "ba_ria_vung_tau",
     "ReesoftProvinceId": 308
@@ -252,10 +252,10 @@
     "ReesoftProvinceId": 286
   },
   {
-    "Name": "Hoà Bình",
+    "Name": "Hòa Bình",
     "Slug": "hoa-binh",
     "Type": "tinh",
-    "name_with_type": "Tỉnh Hoà Bình",
+    "name_with_type": "Tỉnh Hòa Bình",
     "Code": "17",
     "Key": "hoa_binh",
     "ReesoftProvinceId": 285

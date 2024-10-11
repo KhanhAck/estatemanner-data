@@ -1,7 +1,5 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
-using Npgsql;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 
@@ -21,6 +19,8 @@ namespace WebApplication1.Controllers
         private readonly IFileInfo _districtsJsonFile;
         private readonly IFileInfo _provincesJsonFile;
 
+        private readonly ReeSoftDataProvider _reeSoftDataProvider;
+
         public List<RemapsProvinceModel> Provinces { get; private set; } = [];
         public List<RemapsDistrictModel> Districts { get; private set; } = [];
         public List<RemapsWardModel> Wards { get; private set; } = [];
@@ -28,7 +28,8 @@ namespace WebApplication1.Controllers
         public WeatherForecastController(
             IWebHostEnvironment environment,
             ILogger<WeatherForecastController> logger,
-            IHttpClientFactory httpClientFactory)
+            IHttpClientFactory httpClientFactory,
+            ReeSoftDataProvider reeSoftDataProvider)
         {
             _logger = logger;
             _httpClientFactory = httpClientFactory;
@@ -58,6 +59,8 @@ namespace WebApplication1.Controllers
             var wardsTextFromJson = System.IO.File.ReadAllText(_wardsJsonFile.PhysicalPath ?? "");
             if (!string.IsNullOrEmpty(wardsTextFromJson))
                 Wards = JsonSerializer.Deserialize<List<RemapsWardModel>>(wardsTextFromJson) ?? [];
+
+            _reeSoftDataProvider = reeSoftDataProvider;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -75,187 +78,153 @@ namespace WebApplication1.Controllers
             //await System.IO.File.WriteAllTextAsync(_wardsJsonFile.PhysicalPath ?? "",
             //    JsonSerializer.Serialize(wards, _jsonSerializerOptions));
 
-            var connString = "Server=localhost;Database=sagonap_preprod;User Id=sa;Password=sa#123;";
-            using (var connection = new NpgsqlConnection(connString))
-            {
-                // provinces
-                var provinces = await connection.QueryAsync<ProvinceModel>("SELECT * FROM public.province");
+            // provinces
+            var provinces = _reeSoftDataProvider.Provinces;
 
-                foreach (var provinceRecord in Provinces)
+            foreach (var provinceRecord in Provinces)
+            {
+                try
+                {
+                    var reesoftMatchingRecord =
+                        provinces.SingleOrDefault(_ => _.Name.EndsWith(provinceRecord.Name,
+                            StringComparison.OrdinalIgnoreCase));
+
+                    if (reesoftMatchingRecord is not null)
+                    {
+                        provinceRecord.ReesoftProvinceId = reesoftMatchingRecord.Id;
+
+                        var associatedDistricts = Districts.Where(_ => _.ParentCode == provinceRecord.Code)
+                                                           .ToList();
+                        associatedDistricts.ForEach(_ => _.ReesoftProvinceId = reesoftMatchingRecord.Id);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    continue;
+                }
+            }
+
+            // districts
+            var districts = _reeSoftDataProvider.Districts;
+            var groupedByProvince = Districts.GroupBy(_ => _.ReesoftProvinceId);
+
+            foreach (var group in groupedByProvince)
+            {
+                if (group.Key is null)
+                {
+                    continue;
+                }
+
+                var reesoftDistricts = districts.Where(x => x.ProvinceId == group.Key!.Value).ToList();
+
+                foreach (var districtRecord in group)
                 {
                     try
                     {
-                        var reesoftMatchingRecord =
-                            provinces.SingleOrDefault(_ => _.Slug.EndsWith(provinceRecord.Slug,
-                                StringComparison.OrdinalIgnoreCase));
+                        ReeSoftDistrictModel? reesoftMatchingRecord = null;
 
-                        if (reesoftMatchingRecord is not null)
+                        var districtRecordSlug = districtRecord.Name.ToSlug()
+                            .Replace("01", "1")
+                            .Replace("03", "3")
+                            .Replace("04", "4")
+                            .Replace("05", "5")
+                            .Replace("06", "6")
+                            .Replace("07", "7")
+                            .Replace("08", "8");
+                        var reesoftMatchingRecords = reesoftDistricts.Where(_ => _.Name.ToSlug().EndsWith(districtRecordSlug,
+                                StringComparison.OrdinalIgnoreCase)).ToList();
+
+                        if (reesoftMatchingRecords.Count > 1)
                         {
-                            provinceRecord.ReesoftProvinceId = reesoftMatchingRecord.Id;
-
-                            var associatedDistricts = Districts.Where(_ => _.ParentCode == provinceRecord.Code)
-                                                               .ToList();
-                            associatedDistricts.ForEach(_ => _.ReesoftProvinceId = reesoftMatchingRecord.Id);
+                            var nameWithTypeSlug = districtRecord.NameWithType.ToSlug();
+                            reesoftMatchingRecord = reesoftMatchingRecords.SingleOrDefault(_ => _.Name.ToSlug().EndsWith(nameWithTypeSlug,
+                                StringComparison.OrdinalIgnoreCase));
                         }
                         else
                         {
+                            reesoftMatchingRecord = reesoftMatchingRecords.SingleOrDefault();
+                        }
+
+                        if (reesoftMatchingRecord is null)
+                        {
                             continue;
                         }
+
+                        districtRecord.ReesoftDistrictId = reesoftMatchingRecord.Id;
+
+                        var associatedWards = Wards.Where(_ => _.ParentCode == districtRecord.Code)
+                                                   .ToList();
+
+                        associatedWards.ForEach(_ =>
+                        {
+                            _.ReesoftDistrictId = districtRecord.ReesoftDistrictId;
+                            _.ReesoftProvinceId = districtRecord.ReesoftProvinceId;
+                        });
                     }
                     catch (Exception ex)
                     {
                         continue;
                     }
                 }
+            }
 
-                // districts
-                var districts = await connection.QueryAsync<DistrictModel>("SELECT id, name, slug, province_id as ProvinceId FROM public.district");
-                var groupedByProvince = Districts.GroupBy(_ => _.ReesoftProvinceId);
+            // wards
+            var wards = _reeSoftDataProvider.Wards;
+            var groupedByDistrict = Wards.GroupBy(_ => _.ReesoftDistrictId);
 
-                foreach (var group in groupedByProvince)
+            foreach (var group in groupedByDistrict)
+            {
+                if (group.Key is null)
                 {
-                    if (group.Key is null)
-                    {
-                        continue;
-                    }
-
-                    var reesoftDistricts = districts.Where(x => x.ProvinceId == group.Key!.Value).ToList();
-
-                    foreach (var districtRecord in group)
-                    {
-                        try
-                        {
-                            DistrictModel? reesoftMatchingRecord = null;
-
-                            var districtRecordSlug = districtRecord.Name.ToSlug()
-                                .Replace("01", "1")
-                                .Replace("03", "3")
-                                .Replace("04", "4")
-                                .Replace("05", "5")
-                                .Replace("06", "6")
-                                .Replace("07", "7")
-                                .Replace("08", "8");
-                            var reesoftMatchingRecords = reesoftDistricts.Where(_ => _.Name.ToSlug().EndsWith(districtRecordSlug,
-                                    StringComparison.OrdinalIgnoreCase)).ToList();
-
-                            if (reesoftMatchingRecords.Count > 1)
-                            {
-                                var nameWithTypeSlug = districtRecord.NameWithType.ToSlug();
-                                reesoftMatchingRecord = reesoftMatchingRecords.SingleOrDefault(_ => _.Name.ToSlug().EndsWith(nameWithTypeSlug,
-                                    StringComparison.OrdinalIgnoreCase));
-                            }
-                            else
-                            {
-                                reesoftMatchingRecord = reesoftMatchingRecords.FirstOrDefault();
-                            }
-
-                            if (reesoftMatchingRecord is null)
-                            {
-                                continue;
-                            }
-
-                            districtRecord.ReesoftDistrictId = reesoftMatchingRecord.Id;
-
-                            var associatedWards = Wards.Where(_ => _.ParentCode == districtRecord.Code)
-                                                       .ToList();
-
-                            associatedWards.ForEach(_ =>
-                            {
-                                _.ReesoftDistrictId = districtRecord.ReesoftDistrictId;
-                                _.ReesoftProvinceId = districtRecord.ReesoftProvinceId;
-                            });
-                        }
-                        catch (Exception ex)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
 
-                // wards
-                var wards = await connection.QueryAsync<WardModel>("SELECT id, name, slug, district_id as DistrictId FROM public.ward");
-                var groupedByDistrict = Wards.GroupBy(_ => _.ReesoftDistrictId);
+                var reesoftWards = wards.Where(_ => _.DistrictId == group.Key!.Value).ToList();
 
-                foreach (var group in groupedByDistrict)
+                foreach (var wardRecord in group)
                 {
-                    if (group.Key is null)
+                    try
                     {
-                        continue;
-                    }
+                        var wardRecordSlug = wardRecord.Name.ToSlug();
+                        var matchingRecords = reesoftWards.Where(_ => _.Name.ToSlug().EndsWith(wardRecordSlug,
+                            StringComparison.OrdinalIgnoreCase)).ToList();
 
-                    var reesoftWards = wards.Where(_ => _.DistrictId == group.Key!.Value).ToList();
-
-                    foreach (var wardRecord in group)
-                    {
-                        try
+                        if (matchingRecords.Count > 1)
                         {
-                            WardModel? matchingRecord = null;
-                            var wardRecordSlug = wardRecord.Name.ToSlug();
-                            var matchingRecords =
-                                reesoftWards.Where(_ => _.Name.ToSlug().EndsWith(wardRecordSlug, StringComparison.OrdinalIgnoreCase))
-                                .ToList();
-
-                            if (matchingRecords.Count > 1)
-                            {
-                                var nameWithType = wardRecord.NameWithType;
-                                matchingRecord = matchingRecords.SingleOrDefault(_ => _.Name.EndsWith(nameWithType,
-                                    StringComparison.OrdinalIgnoreCase));
-                            }
-                            else
-                            {
-                                matchingRecord = matchingRecords.FirstOrDefault();
-                            }
-
-                            if (matchingRecord is null)
-                            {
-                                continue;
-                            }
-
-                            wardRecord.ReesoftWardId = matchingRecord.Id;
+                            var nameWithType = wardRecord.NameWithType;
+                            matchingRecords = matchingRecords.Where(_ => _.Name.EndsWith(nameWithType,
+                                StringComparison.OrdinalIgnoreCase)).ToList();
                         }
-                        catch (Exception ex)
+
+                        if (matchingRecords.Count == 0)
                         {
                             continue;
                         }
+
+                        wardRecord.ReesoftWardIds = matchingRecords.Select(x => x.Id).ToArray();
+                    }
+                    catch (Exception ex)
+                    {
+                        continue;
                     }
                 }
             }
 
             // sync
             await Task.WhenAll(
-                           System.IO.File.WriteAllTextAsync(_provincesJsonFile.PhysicalPath,
+                           System.IO.File.WriteAllTextAsync(_provincesJsonFile.PhysicalPath!,
                                                   JsonSerializer.Serialize(Provinces, _jsonSerializerOptions)),
-                           System.IO.File.WriteAllTextAsync(_districtsJsonFile.PhysicalPath,
+                           System.IO.File.WriteAllTextAsync(_districtsJsonFile.PhysicalPath!,
                                                   JsonSerializer.Serialize(Districts, _jsonSerializerOptions)),
-                           System.IO.File.WriteAllTextAsync(_wardsJsonFile.PhysicalPath,
+                           System.IO.File.WriteAllTextAsync(_wardsJsonFile.PhysicalPath!,
                                                   JsonSerializer.Serialize(Wards, _jsonSerializerOptions))
                           );
 
-
             return Ok();
         }
-    }
-
-    public class ProvinceModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Slug { get; set; } = string.Empty;
-    }
-
-    public class DistrictModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Slug { get; set; } = string.Empty;
-        public int ProvinceId { get; set; }
-    }
-
-    public class WardModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Slug { get; set; } = string.Empty;
-        public int DistrictId { get; set; }
     }
 }
