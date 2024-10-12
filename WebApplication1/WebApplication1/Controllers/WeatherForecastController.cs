@@ -78,99 +78,99 @@ namespace WebApplication1.Controllers
             //await System.IO.File.WriteAllTextAsync(_wardsJsonFile.PhysicalPath ?? "",
             //    JsonSerializer.Serialize(wards, _jsonSerializerOptions));
 
-            // provinces
-            var provinces = _reeSoftDataProvider.Provinces;
+            //// provinces
+            //var provinces = _reeSoftDataProvider.Provinces;
 
-            foreach (var provinceRecord in Provinces)
-            {
-                try
-                {
-                    var reesoftMatchingRecord =
-                        provinces.SingleOrDefault(_ => _.Name.EndsWith(provinceRecord.Name,
-                            StringComparison.OrdinalIgnoreCase));
+            //foreach (var provinceRecord in Provinces)
+            //{
+            //    try
+            //    {
+            //        var reesoftMatchingRecord =
+            //            provinces.SingleOrDefault(_ => _.Name.EndsWith(provinceRecord.Name,
+            //                StringComparison.OrdinalIgnoreCase));
 
-                    if (reesoftMatchingRecord is not null)
-                    {
-                        provinceRecord.ReesoftProvinceId = reesoftMatchingRecord.Id;
+            //        if (reesoftMatchingRecord is not null)
+            //        {
+            //            provinceRecord.ReesoftProvinceId = reesoftMatchingRecord.Id;
 
-                        var associatedDistricts = Districts.Where(_ => _.ParentCode == provinceRecord.Code)
-                                                           .ToList();
-                        associatedDistricts.ForEach(_ => _.ReesoftProvinceId = reesoftMatchingRecord.Id);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    continue;
-                }
-            }
+            //            var associatedDistricts = Districts.Where(_ => _.ParentCode == provinceRecord.Code)
+            //                                               .ToList();
+            //            associatedDistricts.ForEach(_ => _.ReesoftProvinceId = reesoftMatchingRecord.Id);
+            //        }
+            //        else
+            //        {
+            //            continue;
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        continue;
+            //    }
+            //}
 
-            // districts
-            var districts = _reeSoftDataProvider.Districts;
-            var groupedByProvince = Districts.GroupBy(_ => _.ReesoftProvinceId);
+            //// districts
+            //var districts = _reeSoftDataProvider.Districts;
+            //var groupedByProvince = Districts.GroupBy(_ => _.ReesoftProvinceId);
 
-            foreach (var group in groupedByProvince)
-            {
-                if (group.Key is null)
-                {
-                    continue;
-                }
+            //foreach (var group in groupedByProvince)
+            //{
+            //    if (group.Key is null)
+            //    {
+            //        continue;
+            //    }
 
-                var reesoftDistricts = districts.Where(x => x.ProvinceId == group.Key!.Value).ToList();
+            //    var reesoftDistricts = districts.Where(x => x.ProvinceId == group.Key!.Value).ToList();
 
-                foreach (var districtRecord in group)
-                {
-                    try
-                    {
-                        ReeSoftDistrictModel? reesoftMatchingRecord = null;
+            //    foreach (var districtRecord in group)
+            //    {
+            //        try
+            //        {
+            //            ReeSoftDistrictModel? reesoftMatchingRecord = null;
 
-                        var districtRecordSlug = districtRecord.Name.ToSlug()
-                            .Replace("01", "1")
-                            .Replace("03", "3")
-                            .Replace("04", "4")
-                            .Replace("05", "5")
-                            .Replace("06", "6")
-                            .Replace("07", "7")
-                            .Replace("08", "8");
-                        var reesoftMatchingRecords = reesoftDistricts.Where(_ => _.Name.ToSlug().EndsWith(districtRecordSlug,
-                                StringComparison.OrdinalIgnoreCase)).ToList();
+            //            var districtRecordSlug = districtRecord.Name.ToSlug()
+            //                .Replace("01", "1")
+            //                .Replace("03", "3")
+            //                .Replace("04", "4")
+            //                .Replace("05", "5")
+            //                .Replace("06", "6")
+            //                .Replace("07", "7")
+            //                .Replace("08", "8");
+            //            var reesoftMatchingRecords = reesoftDistricts.Where(_ => _.Name.ToSlug().EndsWith(districtRecordSlug,
+            //                    StringComparison.OrdinalIgnoreCase)).ToList();
 
-                        if (reesoftMatchingRecords.Count > 1)
-                        {
-                            var nameWithTypeSlug = districtRecord.NameWithType.ToSlug();
-                            reesoftMatchingRecord = reesoftMatchingRecords.SingleOrDefault(_ => _.Name.ToSlug().EndsWith(nameWithTypeSlug,
-                                StringComparison.OrdinalIgnoreCase));
-                        }
-                        else
-                        {
-                            reesoftMatchingRecord = reesoftMatchingRecords.SingleOrDefault();
-                        }
+            //            if (reesoftMatchingRecords.Count > 1)
+            //            {
+            //                var nameWithTypeSlug = districtRecord.NameWithType.ToSlug();
+            //                reesoftMatchingRecord = reesoftMatchingRecords.SingleOrDefault(_ => _.Name.ToSlug().EndsWith(nameWithTypeSlug,
+            //                    StringComparison.OrdinalIgnoreCase));
+            //            }
+            //            else
+            //            {
+            //                reesoftMatchingRecord = reesoftMatchingRecords.SingleOrDefault();
+            //            }
 
-                        if (reesoftMatchingRecord is null)
-                        {
-                            continue;
-                        }
+            //            if (reesoftMatchingRecord is null)
+            //            {
+            //                continue;
+            //            }
 
-                        districtRecord.ReesoftDistrictId = reesoftMatchingRecord.Id;
+            //            districtRecord.ReesoftDistrictId = reesoftMatchingRecord.Id;
 
-                        var associatedWards = Wards.Where(_ => _.ParentCode == districtRecord.Code)
-                                                   .ToList();
+            //            var associatedWards = Wards.Where(_ => _.ParentCode == districtRecord.Code)
+            //                                       .ToList();
 
-                        associatedWards.ForEach(_ =>
-                        {
-                            _.ReesoftDistrictId = districtRecord.ReesoftDistrictId;
-                            _.ReesoftProvinceId = districtRecord.ReesoftProvinceId;
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        continue;
-                    }
-                }
-            }
+            //            associatedWards.ForEach(_ =>
+            //            {
+            //                _.ReesoftDistrictId = districtRecord.ReesoftDistrictId;
+            //                _.ReesoftProvinceId = districtRecord.ReesoftProvinceId;
+            //            });
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            continue;
+            //        }
+            //    }
+            //}
 
             // wards
             var wards = _reeSoftDataProvider.Wards;
@@ -189,7 +189,18 @@ namespace WebApplication1.Controllers
                 {
                     try
                     {
-                        var wardRecordSlug = wardRecord.Name.ToSlug();
+                        var wardRecordSlug = wardRecord.Name.ToSlug()
+                            .Replace("01", "1")
+                            .Replace("02", "2")
+                            .Replace("03", "3")
+                            .Replace("04", "4")
+                            .Replace("05", "5")
+                            .Replace("06", "6")
+                            .Replace("07", "7")
+                            .Replace("08", "8")
+                            .Replace("09", "9");
+
+                        //var wardRecordSlug = wardRecord.Name.ToSlug();
                         var matchingRecords = reesoftWards.Where(_ => _.Name.ToSlug().EndsWith(wardRecordSlug,
                             StringComparison.OrdinalIgnoreCase)).ToList();
 
@@ -216,10 +227,10 @@ namespace WebApplication1.Controllers
 
             // sync
             await Task.WhenAll(
-                           System.IO.File.WriteAllTextAsync(_provincesJsonFile.PhysicalPath!,
-                                                  JsonSerializer.Serialize(Provinces, _jsonSerializerOptions)),
-                           System.IO.File.WriteAllTextAsync(_districtsJsonFile.PhysicalPath!,
-                                                  JsonSerializer.Serialize(Districts, _jsonSerializerOptions)),
+                           //System.IO.File.WriteAllTextAsync(_provincesJsonFile.PhysicalPath!,
+                           //                       JsonSerializer.Serialize(Provinces, _jsonSerializerOptions)),
+                           //System.IO.File.WriteAllTextAsync(_districtsJsonFile.PhysicalPath!,
+                           //                       JsonSerializer.Serialize(Districts, _jsonSerializerOptions)),
                            System.IO.File.WriteAllTextAsync(_wardsJsonFile.PhysicalPath!,
                                                   JsonSerializer.Serialize(Wards, _jsonSerializerOptions))
                           );
